@@ -91,13 +91,14 @@ top: -2px;
 
 header #subhead {
 color: #444;
-margin:0 0 22px 0;
+margin: 0 0 20px 0;
 }
 
 header #notSure {
-color: #666;
+color: #000;
 font-size: 0.8em;
 margin: 0 0 0 85px;
+opacity: 0.5;
 }
 
 #warning {
@@ -156,6 +157,21 @@ margin: 0 20px 0 0;
 float: left;
 }
 
+/* aagh! to show download warning in Firefox */
+body:-moz-last-node .howToDownload {
+display: none;
+}
+
+#firefoxWarning {
+display: none;
+}
+
+/* aagh again! to show download warning in Firefox */
+body:-moz-last-node #firefoxWarning {
+color: red;
+display: block;
+}
+
 div#iconMessage {
 background: #e5e5e5;
 bottom: -11px;
@@ -167,13 +183,12 @@ position: absolute;
 text-align: bottom;
 }
 
-/* aagh! to position correctly, given different file input appearance */
+/* aagh again! to position correctly, given different file input appearance */
 body:-moz-last-node #iconMessage {
 bottom: 31px;
 left: 270px;
 padding: 0;
 }
-
 
 div#iconMessage p {
 line-height: 0.5em;
@@ -200,12 +215,10 @@ font-size: 16px;
 margin: 0 0 0 129px;
 }
 
+/* aagh again! to get correct file input width in Firefox */
 body:-moz-last-node input#file128 {
 width: auto;
 }
-
-
-
 
 ::-webkit-file-upload-button {
 -webkit-appearance: square-button;

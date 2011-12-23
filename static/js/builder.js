@@ -150,7 +150,7 @@ var Builder = new (function () {
 
 	if (typeof url === "undefined") {
 		context.clearRect(0, 0, canvas.width, canvas.height);
-		clearIconMessage();
+		iconMessage("<p>Select a 128x128px <a href='http://code.google.com/chrome/webstore/docs/images.html' title='Chrome Web Store documentation: Supplying images' target='_blank'>app icon</a>.</p>");
 		canvas.style.borderStyle = "dashed"; //
 	} else {
 		image.src = "/api/image?url=" + url; // Use the proxy so not tainted.
