@@ -29,7 +29,7 @@
 goog.require("goog.format.JsonPrettyPrinter");
 </script>
 
-<script src="/js/main.js"></script>
+<script src="js/main.js"></script>
 
 </head>
 
@@ -38,9 +38,10 @@ goog.require("goog.format.JsonPrettyPrinter");
 <div id="all">
 
 <header>
-	<img id="cwsLogo" src="images/cwsLogo128x128.png" alt="">
+	<a href="https://chrome.google.com/webstore/category/home" title="Chrome Web Store homepage" target="_blank"><img id="cwsLogo" src="images/cwsLogo128x128.png" alt=""></a>
 	<h1>Appmator</h1>
-	<div id="subhead">Package your app for the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store">Chrome Web Store</a></div>
+	<div id="subhead">Prepare your app for upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store">Chrome Web Store</a></div>
+	<div id="notSure">Not sure what this means? Take a look at the <a href="http://code.google.com/chrome/webstore/docs/get_started_simple.html" title="Chrome Web Store: Getting Started tutorial" target="_blank">Getting started</a> tutorial.</div>
 </header>
 
 
@@ -51,7 +52,7 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<label for="url">App URL:</label>
 	<input type="url" id="url" value="" required placeholder="www.example.com" autofocus autocomplete="on">
 	<!-- code is from CWS -->
-	<div id="urlButton" role="button" class="goog-inline-block webstore-button-blue webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-white_plus-icon"></div><div class="webstore-button-label">Start Packaging!</div></div></div>
+	<div id="urlButton" role="button" class="goog-inline-block webstore-button-blue webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-white_plus-icon"></div><div class="webstore-button-label">Start!</div></div></div>
 	<div id="urlMessage" class="message"></div>
 </div>	
 
@@ -72,11 +73,11 @@ goog.require("goog.format.JsonPrettyPrinter");
 <div id="details">
 
 <div id="download">
-	<div id="yourApp">Your app is ready!</div>
+	<div id="yourApp">Your app is ready to be uploaded!</div>
 	<div id="package">
 		<a id="downloadLink" download="" href=""><img src="/images/zip.png" alt="Package" draggable="true" class="created" id="output" /></a>
 		<div>1. Drag the ZIP file to your desktop, or click to download it.</div>
-		<div>2. Upload the ZIP file to the <a href="http://chrome.google.com/webstore/developer/dashboard" target="_blank">Chrome Web Store</a>.</div>
+		<div>2. Upload it from your <a href="https://chrome.google.com/webstore/developer/update" target="_blank">Chrome Web Store dashboard</a>.</div>
 		<div id="editInformation">You can edit details below. The ZIP file will be updated automatically.</div>
 	</div>
 </div>
@@ -99,14 +100,16 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<label for="offlineEnabledTrue">Yes</label>
 	<input value="false" name="offlineEnabled" type="radio" id="offlineEnabledFalse" checked>
 	<label for="offlineEnabledFalse">No</label>
+	<div class="wtf">Can your app be used without connectivity? Learn more about offline at <a href="http://www.html5rocks.com/en/features/offline" title="HTML5 Rocks articles about ">HTML5 Rocks</a>.</div>
 </div>
 
 <div class="infoItem" id="permissionsContainer">
 	<label for="permissions">Permissions:</label>
-	<input value="notifications" name="permissions" type="checkbox" id="notifications"><label for="notifications">Notifications</label>
-	<input value="unlimitedStorage" name="permissions" type="checkbox" id="unlimitedStorage"><label for="unlimitedStorage">Unlimited Storage</label>
-	<input value="geolocation" name="permissions" type="checkbox" id="geolocation"><label for="geolocation">Geolocation</label>
-	<input value="background" name="permissions" type="checkbox" id="background"><label for="background">Background</label>
+	<input value="notifications" name="permissions" type="checkbox" id="notifications" title="Allow the app to use the HTML5 notification API"><label for="notifications" title="Allow the app to use the HTML5 notification API">Notifications</label>
+	<input value="unlimitedStorage" name="permissions" type="checkbox" id="unlimitedStorage" title="Provide an unlimited quota for storing client-side data, such as databases and local storage files. Without this permission, storage is limited to 5MB."><label for="unlimitedStorage" title="Provide an unlimited quota for storing client-side data, such as databases and local storage files. Without this permission, storage is limited to 5MB.">Unlimited Storage</label>
+	<input value="geolocation" name="permissions" type="checkbox" id="geolocation" title="Allow the app to use the HTML5 geolocation API without prompting the user for permission."><label for="geolocation" title="Allow the app to use the HTML5 geolocation API without prompting the user for permission.">Geolocation</label>
+	<input value="background" name="permissions" type="checkbox" id="background" title="When an app has background permission, Chrome runs (invisibly) as soon as the user logs into their computer — before the user launches Chrome. The background permission also makes Chrome continue running (even after its last window is closed) until the user explicitly quits Chrome."><label for="background" title="When an app has background permission, Chrome runs (invisibly) as soon as the user logs into their computer — before the user launches Chrome. The background permission also makes Chrome continue running (even after its last window is closed) until the user explicitly quits Chrome.">Background</label>
+	<div class="wtf">Select the features of your app that need <a href="http://code.google.com/chrome/extensions/manifest.html#permissions" title="Chrome Web Store permissions documentation">permission from the user</a>.</div>
 </div>
 
 <div class="infoItem" id="backgroundPageContainer">

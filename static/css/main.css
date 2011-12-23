@@ -35,12 +35,12 @@ width: 657px;
 }
 
 
-.infoItem {
+div.infoItem {
 clear: both;
 margin: 0 0 1em 0;
 }
 
-.infoItem input[type="text"], .infoItem input[type="url"] {
+div.infoItem input[type="text"], .infoItem input[type="url"] {
 font-size: 1em;
 padding: 3px 3px 3px 5px;
 border-radius: 2px;
@@ -49,7 +49,7 @@ top: -0.4em;
 text-overflow: ellipsis;
 }
 
-.infoItem label {
+div.infoItem label {
 display: block;
 float: left;
 font-weight: bold;
@@ -57,18 +57,15 @@ width: 129px;
 font-weight: bold;
 }
 
-/*
-div.label {
-float: left;
-font-weight: bold;
-width: 152px;
+div.infoItem div.wtf {
+color: #666;
+font-size: 0.8em;
+margin: 0 0 0 130px;
 }
-*/
+
 
 
 header {
-color: #666;
-font-size: 1em;
 margin: 0 0 40px 0;
 border-bottom: 1px solid #C6C6C6;
 box-shadow: 0px 1px 0px 0px #fefefe;
@@ -79,30 +76,43 @@ header img#cwsLogo {
 float: left;
 height: 60px;
 margin: 0 1.5em 0 0;
-padding: 0.2em 0 0 0;
+padding: 5px 0 0 0;
+width:  60px;
 }
 
 header h1 {
-font-size: 28px;
-margin: 0 0 0.1em 0;
-padding: 0 0 0 0;
 color: #262626;
+font-size: 1.8em;
+margin: 0 0 1px 0;
+padding: 0 0 0 0;
+position: relative;
+top: -2px;
 }
 
+header #subhead {
+color: #444;
+margin:0 0 22px 0;
+}
+
+header #notSure {
+color: #666;
+font-size: 0.8em;
+margin: 0 0 0 85px;
+}
 
 #warning {
+background-color: rgba(255, 0, 0, 0.2);
+border-radius: 2px 2px 2px 2px;
 display: none;
-background-color: rgba(255,0,0, 0.2);
-margin: 0 0 20px 0;
-padding: 10px 10px 10px 10px;
-border-radius: 2px;
-width: 780px;
+margin: 0 0 46px;
+padding: 10px;
+width: 635px;
 }
 
 
 #whereIsContainer input#url {
 margin: 0 10px 0 0;
-width: 357px;
+width: 361px;
 }
 
 #whereIsContainer div#urlButton {
@@ -157,6 +167,14 @@ position: absolute;
 text-align: bottom;
 }
 
+/* aagh! to position correctly, given different file input appearance */
+body:-moz-last-node #iconMessage {
+bottom: 31px;
+left: 270px;
+padding: 0;
+}
+
+
 div#iconMessage p {
 line-height: 0.5em;
 margin: 3px 0 1.2em 0;
@@ -178,9 +196,16 @@ div#iconMessage.warningPulse {
 }
 
 input#file128 {
-font-size: 1em;
+font-size: 16px;
 margin: 0 0 0 129px;
 }
+
+body:-moz-last-node input#file128 {
+width: auto;
+}
+
+
+
 
 ::-webkit-file-upload-button {
 -webkit-appearance: square-button;
@@ -231,13 +256,13 @@ margin:  0 0 20px 0;
 }
 
 #output.updated {
--webkit-animation: updated 1s ease-in-out;
+-webkit-animation: updated 0.5s ease-in-out;
 -webkit-animation-iteration-count: 1;
 }
 
 @-webkit-keyframes updated {
 0% { -webkit-transform: scale(1, 1);}
-50% { -webkit-transform: scale(1.2, 1.2); opacity: 0.5}
+50% { -webkit-transform: scale(1.1, 1.1); opacity: 0.5}
 100% { -webkit-transform: scale(1, 1)}
 }
 
@@ -321,7 +346,7 @@ width: 105px;
 }
 
 textarea#manifest {
-height: 370px;
+height: 330px;
 padding: 10px 10px 0 10px;
 font-size: 1em;
 font-family: monospace;

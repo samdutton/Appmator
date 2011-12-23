@@ -68,8 +68,9 @@ var Builder = new (function () {
     }
     
     updateUI();
-    output.classList.remove("updated");
-    setTimeout(function(){output.classList.add("updated")}, 1);
+    var outputElement = document.getElementById("output");
+    outputElement.classList.remove("updated");
+    setTimeout(function(){outputElement.classList.add("updated")}, 1);
   };
   
   this.toggleLaunch = function(e) {
@@ -158,12 +159,13 @@ var Builder = new (function () {
 			if (this.width != iconSize || this.width != iconSize) {
 				canvas.style.borderStyle = "dashed";
 				iconWarning("<p>The app icon size should be " + iconSize + "x" + iconSize + 
-					"px.</p><p>The retrieved " + this.width + "x" + this.height + "px image has been scaled.</p><p>Please select a different image.<p>");
+					"px.</p><p>The retrieved " + this.width + "x" + this.height + "px image has been scaled.</p><p>You may want to select a different image.<p>");
 			} else {
-				iconMessage("<p>Icon looks good! Choose another if you want.</p>");
+				var urlSplit = url.split("/");
+				iconMessage("<p>" + urlSplit[urlSplit.length - 1] + "</p>");
 				canvas.style.borderStyle = "solid";
-				document.getElementById("details").style.display = "block";
 			}
+			document.getElementById("details").style.display = "block";
 			context.drawImage(image, 0, 0, iconSize, iconSize); // rescale the image
 		});
 	}
@@ -348,6 +350,7 @@ if (inf.name.length > 45) {
     permissions["unlimitedStorage"] = document.getElementById("unlimitedStorage");
     permissions["background"] = document.getElementById("background");
 
+    var background = document.getElementById("background");
     var backgroundPage = document.getElementById("backgroundPage");
     
     // Container type: tab, window or panel

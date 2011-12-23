@@ -12,15 +12,14 @@
   });
   
 Modernizr.addTest('blobbuilder', function() {
-	return !!window.Blob && !!window.WebKitBlobBuilder && 
-		!!webkitURL.createObjectURL;
+	return !!window.WebKitBlobBuilder || !!window.MozBlobBuilder || !!window.BlobBuilder;
 });
   
   window.addEventListener("DOMContentLoaded", function() {
 	
 	var warning = document.getElementById("warning");
 	
-	if(!( Modernizr.draganddrop && 
+	if(!( /* Modernizr.draganddrop */ 
 		  Modernizr.classlist &&
 		  Modernizr.blobbuilder &&
 		  Modernizr.canvas)){
@@ -37,6 +36,7 @@ Modernizr.addTest('blobbuilder', function() {
 	var unlimitedStorage = document.getElementById("unlimitedStorage");
 	var geolocation = document.getElementById("geolocation");
 	var background = document.getElementById("background");
+	var backgroundPage = document.getElementById("backgroundPage");
 	var backgroundPageContainer = document.getElementById("backgroundPageContainer");
 	var manifest = document.getElementById("manifest");
 	var output = document.getElementById("output");
@@ -50,7 +50,7 @@ Modernizr.addTest('blobbuilder', function() {
 	
 	var name = document.getElementById("name");
 	var description = document.getElementById("description");
-	var versions = document.getElementById("version");
+	var version = document.getElementById("version");
 	
 	var launcher = document.getElementById("launcher");
 	
@@ -183,7 +183,17 @@ Modernizr.addTest('blobbuilder', function() {
 	if(Modernizr.typedarray) {
 	  	  
 	  downloadLink.addEventListener("click", function() {
-		var bb = new WebKitBlobBuilder();
+	  	var bb;
+		if (!!window.WebKitBlobBuilder) {
+			bb = new WebKitBlobBuilder(); 
+		} else if (!!window.MozBlobBuilder) {
+			bb = new MozBlobBuilder();
+		} else if (!!window.BlobBuilder) {
+			bb = new BlobBuilder();
+		} else {
+			console.log("BlobBuilder not supported.");
+			return;
+		}
 	  
 		var output = Builder.output({"binary":true});
 		var ui8a = new Uint8Array(output.length);
@@ -195,24 +205,21 @@ Modernizr.addTest('blobbuilder', function() {
 		bb.append(ui8a.buffer);
 	  
 		var blob = bb.getBlob("application/octet-stream");
-//		var saveas = document.createElement("iframe");
-//		saveas.style.display = "none";
 		
-		if(!!window.createObjectURL == false) {
-// 		  saveas.src = window.webkitURL.createObjectURL(blob);
+		if (!!window.webkitURL && !!window.webkitURL.createObjectURL) {
 		  downloadLink.href = window.webkitURL.createObjectURL(blob); 
 		}
-		else {
-// 		  saveas.src = window.createObjectURL(blob); 
-		  downloadLink.href = window.createObjectURL(blob);
+		else if (!!window.URL && !!window.URL.createObjectURL) {
+		  downloadLink.href = window.URL.createObjectURL(blob);
 		}
-		downloadLink.download = name.value + ".zip";		
-		downloadLink.name = name.value;		
-//		document.body.appendChild(saveas);
+		var appName = document.getElementById("name").value.replace(/\s/g, "_");
+		downloadLink.download = appName + ".zip";		
+		downloadLink.name = appName + ".zip";		
 	  });
 	}
 	
 	// If there is a hash load URL from that
+/* 
 	if(window.location.hash && window.location.hash !="") {
 	  var newUrl = window.location.hash.substr(1);
 	  urlInput.value = newUrl;
@@ -231,5 +238,7 @@ Modernizr.addTest('blobbuilder', function() {
 		}
 	  });
 	}
+
+ */
   });
 })();
