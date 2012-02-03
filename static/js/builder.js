@@ -234,12 +234,13 @@ var Builder = new (function () {
   };
   
   //Build a valid manifest
-//// info instead of inf?
   var parseInfo = function(inf) {
     manifest.app = {};
     manifest.offline_enabled = false;
     manifest.permissions = [];
-//    manifest.app.background_page = "";
+    manifest.requirements = {};
+    manifest.requirements["3D"] = {}; // will need to change this...
+    manifest.requirements["3D"].features = [];
     manifest.app.launch = {};
     manifest.icons = {
       "128": "128.png"
@@ -366,6 +367,11 @@ if (inf.name.length > 45) {
     permissions["unlimitedStorage"] = document.getElementById("unlimitedStorage");
     permissions["background"] = document.getElementById("background");
 
+    // Requirements
+    var requirements = {};
+    requirements["css3d"] = document.getElementById("css3d");
+    requirements["webgl"] = document.getElementById("webgl");
+
     var background = document.getElementById("background");
     var backgroundPage = document.getElementById("backgroundPage");
     
@@ -406,9 +412,14 @@ if (inf.name.length > 45) {
       urls.options.add(option);
     }
     
-    // Toggle the permissions
+    // Toggle permissions
     for (var p in permissions) {
         permissions[p].checked = false;
+    }
+    
+    // Toggle requirements
+    for (var requirement in requirements) {
+        requirements[requirement].checked = false;
     }
     
 	if (backgroundPage.value === "") {
@@ -430,9 +441,14 @@ if (inf.name.length > 45) {
     	offlineEnabledFalse.checked = true;
     };
     
-    for(var permission in manifest.permissions) {
+    for (var permission in manifest.permissions) {
       var permName =  manifest.permissions[permission];
       permissions[permName].checked = true;
+    }
+    
+    for (var requirement in manifest.requirements["3D"].features) {
+      var requirementName =  manifest.requirements["3D"].features[requirement];
+      requirements[requirementName].checked = true;
     }
     
     // Select the correct launch type

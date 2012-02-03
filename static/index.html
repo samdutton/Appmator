@@ -106,6 +106,10 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<label for="name">App name:</label><input id="name" type="text" placeholder="What is your app called?" maxlength="45">
 </div>
 
+<div class="infoItem" id="launchContainer">
+	<label for="launch">Launch URL:</label><input id="launch" type="text" placeholder="What is your application launch URL?">
+</div>
+
 <div class="infoItem" id="descriptionContainer">
 	<label for="description">Description:</label><input id="description" type="text" placeholder="What does your app do?" maxlength="132">
 </div>
@@ -133,7 +137,7 @@ goog.require("goog.format.JsonPrettyPrinter");
 </div>
 
 <div class="infoItem" id="requirementsContainer">
-	<label for="requirements">Permissions:</label>
+	<label for="requirements">Requirements:</label>
 	<input value="css3d" name="requirements" type="checkbox" id="css3d" title="Allow the app to use CSS 3D Transforms"><label for="css3d" title="Allow the app to use CSS 3D Transforms">CSS 3D</label>
 	<input value="webgl" name="requirements" type="checkbox" id="webgl" title="Allow the app to use WebGL"><label for="webgl" title="Allow the app to use WebGL">WebGL</label>
 	<div class="wtf">Technologies required by the app or extension. Support for additional requirements checks may be added in the future. More information <a href="http://code.google.com/chrome/extensions/manifest.html#requirements" title="Chrome Web Store requirements documentation" target="_blank">here</a>.</div>
@@ -141,10 +145,6 @@ goog.require("goog.format.JsonPrettyPrinter");
 
 <div class="infoItem" id="backgroundPageContainer">
 	<label for="backgroundPage">Background page:</label><input id="backgroundPage" type="text" placeholder="Enter https:// URL for your background page">
-</div>
-
-<div class="infoItem" id="launchContainer">
-	<label for="launch">Launch URL:</label><input id="launch" type="text" placeholder="What is your application launch URL?">
 </div>
 
 <div class="infoItem" id="urlsContainer">
