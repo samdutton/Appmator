@@ -29,10 +29,7 @@
 <script src="js/thirdparty/closure/closure/goog/base.js"></script>
 <script src="js/thirdparty/jquery-1.7.1.min.js"></script>
 
-<!-- Colorbox (for Make Icon button) -->
-<link rel="stylesheet" href="css/thirdparty/colorbox/colorbox.css" />
-<script src="js/thirdparty/jquery.colorbox.js"></script>
-
+<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/pndpgaogppgnfdnagodccjlhfjgdefij" />
 
 <script>
 goog.require("goog.format.JsonPrettyPrinter");
@@ -53,6 +50,9 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<h1>Appmator</h1>
 	<div id="subhead">Prepare your app for upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store" target="_blank">Chrome Web Store</a></div>
 	<div id="notSure">New here? Take a look at the <a href="http://code.google.com/chrome/webstore/docs/get_started_simple.html" title="Chrome Web Store: Getting Started tutorial" target="_blank">Getting Started</a> tutorial.</div>
+	<!-- code is from CWS -->
+	<div id="addToChromeButton" role="button" class="goog-inline-block webstore-button-blue webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-white_plus-icon"></div><div class="webstore-button-label" title="Install Appmator as a Chrome app">+ ADD TO CHROME</div></div></div>
+
 </header>
 
 
@@ -63,7 +63,7 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<label for="url">App URL:</label>
 	<input type="url" id="url" value="" required placeholder="www.example.com" autofocus autocomplete="on">
 	<!-- code is from CWS -->
-	<div id="urlButton" role="button" class="goog-inline-block webstore-button-blue webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-white_plus-icon"></div><div class="webstore-button-label">Start!</div></div></div>
+	<div id="urlButton" role="button" class="goog-inline-block webstore-button-red webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-red_plus-icon"></div><div class="webstore-button-label" title="Enter the URL for your app - then click to start building a package for upload to the Chrome Web Store">Start!</div></div></div>
 	<div id="urlMessage" class="message"></div>
 	<div class="wtf">The address of the app you would like to upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store" target="_blank">Chrome Web Store</a>.</div>
 </div>	

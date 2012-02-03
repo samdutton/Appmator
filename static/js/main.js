@@ -17,6 +17,18 @@ Modernizr.addTest('blobbuilder', function() {
   
   window.addEventListener("DOMContentLoaded", function() {
   
+	$("div#addToChromeButton").click(function() {
+		var url = "https://chrome.google.com/webstore/detail/pndpgaogppgnfdnagodccjlhfjgdefij";
+		var successCallback = function(){console.log("success")};
+		var failureCallback = function(message){console.log("failure: " + message)};
+		chrome.webstore.install(url, successCallback, failureCallback);	
+	});
+  
+  	// hide the + ADD TO CHROME button if the app is already installed
+	if (chrome.app.isInstalled) {
+		document.getElementById("div#addToChromeButton").display = "none";
+	}
+  
 	$("button.makeIcon").click(function() {
 		// This will edit the existing icon, if you don't want that simply send in a transparent 128px icon instead of the current icon.
 		var canvasElement = document.getElementById("c128");
