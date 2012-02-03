@@ -16,6 +16,19 @@ Modernizr.addTest('blobbuilder', function() {
 });
   
   window.addEventListener("DOMContentLoaded", function() {
+  
+	$("button.makeIcon").click(function() {
+		// This will edit the existing icon, if you don't want that simply send in a transparent 128px icon instead of the current icon.
+		var canvasElement = document.getElementById("c128");
+		var data = canvasElement.toDataURL("image/png");
+		var intent = new Intent("http://webintents.org/edit", "image/png", data);
+		window.navigator.startActivity(intent, function(newData) {
+			var newImage = new Image();
+			newImage.src = newData;
+			canvasElement.getContent().addImage(newImage, 0, 0);
+		});
+	});
+	
 	
 	var warning = document.getElementById("warning");
 	
@@ -30,12 +43,17 @@ Modernizr.addTest('blobbuilder', function() {
 	var language = document.getElementById("language");
 	var start = document.getElementById("start");
 	var icon128 = document.getElementById("icon128");
+
 	var offlineEnabledTrue = document.getElementById("offlineEnabledTrue");
 	var offlineEnabledFalse = document.getElementById("offlineEnabledFalse");
 	var notifications = document.getElementById("notifications");
 	var unlimitedStorage = document.getElementById("unlimitedStorage");
 	var geolocation = document.getElementById("geolocation");
 	var background = document.getElementById("background");
+
+	var css3d = document.getElementById("css3d");
+	var webgl = document.getElementById("webgl");
+
 	var backgroundPage = document.getElementById("backgroundPage");
 	var backgroundPageContainer = document.getElementById("backgroundPageContainer");
 	var manifest = document.getElementById("manifest");
@@ -166,6 +184,10 @@ Modernizr.addTest('blobbuilder', function() {
 		return true;
 	});
 	
+	css3d.addEventListener("click", Builder.toggleRequirement);
+	webgl.addEventListener("click", Builder.toggleRequirement);
+
+	
 	launcher.addEventListener("change", Builder.toggleLaunch);
 	
 	file128.addEventListener("change", Builder.readImage);	
@@ -240,5 +262,9 @@ Modernizr.addTest('blobbuilder', function() {
 	}
 
  */
+ 
+	// Set up Colorbox for Make Icon button
+//	$("a.makeIcon").colorbox();
+
   });
 })();

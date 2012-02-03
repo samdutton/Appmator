@@ -73,9 +73,25 @@ var Builder = new (function () {
     setTimeout(function(){outputElement.classList.add("updated")}, 1);
   };
   
+   this.toggleRequirement = function(e) {
+    if(e.target.checked) {
+      manifest.requirements["3D"].features.push(e.target.id); // will need to update...
+    }
+    else {
+      var idx = manifest.requirements["3D"].features.indexOf(e.target.id);
+      manifest.requirements["3D"].features = manifest.requirements["3D"].features.filter(function(i) {
+       if(i != e.target.id) return true;
+       else return false; 
+      });
+    }        
+    updateUI();
+    var outputElement = document.getElementById("output");
+    outputElement.classList.remove("updated");
+    setTimeout(function(){outputElement.classList.add("updated")}, 1);
+  };
+  
   this.toggleLaunch = function(e) {
-    manifest.app.launch.container = e.target.value;
-   
+    manifest.app.launch.container = e.target.value;  
     updateUI();
   };
 
@@ -150,7 +166,7 @@ var Builder = new (function () {
 
 	if (typeof url === "undefined") {
 		context.clearRect(0, 0, canvas.width, canvas.height);
-		iconMessage("<p>Select a 128x128px <a href='http://code.google.com/chrome/webstore/docs/images.html' title='Chrome Web Store documentation: Supplying images' target='_blank'>app icon</a>.</p>");
+		iconMessage("");
 		canvas.style.borderStyle = "dashed"; //
 	} else {
 		image.src = "/api/image?url=" + url; // Use the proxy so not tainted.

@@ -11,8 +11,11 @@
 <!-- <meta name="application-url" content="http://appmator.appspot.com"/> -->
 <meta name="google-site-verification" content="giZg2GBz30YubQK1LdzRGlQBGHjMWhUeeSO8TR_uiwE" />
 
+
 <link rel="shortcut icon" href="/images/16.png" type="image/png" />
 <link rel="shortcut icon" href="/images/128.png" sizes="128x128" type="image/png" />
+<link rel="apple-touch-icon" href="images/appleItouchIcon.png"/>
+
 <link rel="license" href="/LICENCE" />
 <link rel="author" href="http://paul.kinlan.me/" />
 
@@ -24,12 +27,20 @@
 <script src="js/thirdparty/modernizr-1.6.min.js"></script>
 <script src="js/thirdparty/jszip.js"></script>
 <script src="js/thirdparty/closure/closure/goog/base.js"></script>
+<script src="js/thirdparty/jquery-1.7.1.min.js"></script>
+
+<!-- Colorbox (for Make Icon button) -->
+<link rel="stylesheet" href="css/thirdparty/colorbox/colorbox.css" />
+<script src="js/thirdparty/jquery.colorbox.js"></script>
+
 
 <script>
 goog.require("goog.format.JsonPrettyPrinter");
 </script>
 
 <script src="js/main.js"></script>
+
+<intent action="http://webintents.org/edit" type="image/png" href="chromeStudio/index.html" >
 
 </head>
 
@@ -40,8 +51,8 @@ goog.require("goog.format.JsonPrettyPrinter");
 <header>
 	<a href="https://chrome.google.com/webstore/category/home" title="Chrome Web Store homepage" target="_blank"><img id="cwsLogo" src="images/cwsLogo128x128.png" alt=""></a>
 	<h1>Appmator</h1>
-	<div id="subhead">Prepare your app for upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store">Chrome Web Store</a></div>
-	<div id="notSure">Not sure what this means? Take a look at the <a href="http://code.google.com/chrome/webstore/docs/get_started_simple.html" title="Chrome Web Store: Getting Started tutorial" target="_blank">Getting started</a> tutorial.</div>
+	<div id="subhead">Prepare your app for upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store" target="_blank">Chrome Web Store</a></div>
+	<div id="notSure">New here? Take a look at the <a href="http://code.google.com/chrome/webstore/docs/get_started_simple.html" title="Chrome Web Store: Getting Started tutorial" target="_blank">Getting Started</a> tutorial.</div>
 </header>
 
 
@@ -54,19 +65,27 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<!-- code is from CWS -->
 	<div id="urlButton" role="button" class="goog-inline-block webstore-button-blue webstore-button-180-by-30 webstore-button" style="-webkit-user-select: none; " tabindex="0"><div class="webstore-button-content"><div class="webstore-button-icon webstore-button-white_plus-icon"></div><div class="webstore-button-label">Start!</div></div></div>
 	<div id="urlMessage" class="message"></div>
+	<div class="wtf">The address of the app you would like to upload to the <a href="https://chrome.google.com/webstore" title="Google Chrome Web Store" target="_blank">Chrome Web Store</a>.</div>
 </div>	
 
 
 <div id="iconContainer" class="infoItem">
 	<label>App icon:</label>
 	<div id="icon128">
-		<canvas id="c128" width="128" height="128"></canvas>
-		<div id="iconMessage">
-			<p>Select a 128x128px <a href="http://code.google.com/chrome/webstore/docs/images.html" title="Chrome Web Store documentation: Supplying images" target="_blank">app icon</a>.</p>
-		</div>
-		
+		<canvas id="c128" width="128" height="128"></canvas>		
 	</div>
-	<input type="file" id="file128">
+	<div id="iconStuff">
+		<button class="makeIcon">Edit Icon</button>
+		<input type="file" id="file128" title="Click too select an icon you've already made">
+		<div id="iconMessage"></div>
+	</div>
+	<div class="wtf">
+		<p>Your app must have a 128x128px <a href="http://code.google.com/chrome/webstore/docs/images.html" title="Chrome Web Store documentation: Supplying images" target="_blank">app icon</a>.</p>
+		<p>Choose an icon file, if you already have one.</p> 
+		<p>Click the Edit Icon button to edit the icon file you chose, or to create a new one.</p>
+	</div>
+
+
 </div>
 
 
@@ -101,7 +120,7 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<label for="offlineEnabledTrue">Yes</label>
 	<input value="false" name="offlineEnabled" type="radio" id="offlineEnabledFalse" checked>
 	<label for="offlineEnabledFalse">No</label>
-	<div class="wtf">Can your app be used without connectivity? Learn more about offline at <a href="http://www.html5rocks.com/en/features/offline" title="HTML5 Rocks articles about ">HTML5 Rocks</a>.</div>
+	<div class="wtf">Can your app be used without connectivity? Learn more about offline at <a href="http://www.html5rocks.com/en/features/offline" title="HTML5 Rocks articles about offline" target="_blank">HTML5 Rocks</a>.</div>
 </div>
 
 <div class="infoItem" id="permissionsContainer">
@@ -110,7 +129,14 @@ goog.require("goog.format.JsonPrettyPrinter");
 	<input value="unlimitedStorage" name="permissions" type="checkbox" id="unlimitedStorage" title="Provide an unlimited quota for storing client-side data, such as databases and local storage files. Without this permission, storage is limited to 5MB."><label for="unlimitedStorage" title="Provide an unlimited quota for storing client-side data, such as databases and local storage files. Without this permission, storage is limited to 5MB.">Unlimited Storage</label>
 	<input value="geolocation" name="permissions" type="checkbox" id="geolocation" title="Allow the app to use the HTML5 geolocation API without prompting the user for permission."><label for="geolocation" title="Allow the app to use the HTML5 geolocation API without prompting the user for permission.">Geolocation</label>
 	<input value="background" name="permissions" type="checkbox" id="background" title="When an app has background permission, Chrome runs (invisibly) as soon as the user logs into their computer — before the user launches Chrome. The background permission also makes Chrome continue running (even after its last window is closed) until the user explicitly quits Chrome."><label for="background" title="When an app has background permission, Chrome runs (invisibly) as soon as the user logs into their computer — before the user launches Chrome. The background permission also makes Chrome continue running (even after its last window is closed) until the user explicitly quits Chrome.">Background</label>
-	<div class="wtf">Select the features of your app that need <a href="http://code.google.com/chrome/extensions/manifest.html#permissions" title="Chrome Web Store permissions documentation">permission from the user</a>.</div>
+	<div class="wtf">Select the features of your app that need <a href="http://code.google.com/chrome/extensions/manifest.html#permissions" title="Chrome Web Store permissions documentation" target="_blank">permission from the user</a>.</div>
+</div>
+
+<div class="infoItem" id="requirementsContainer">
+	<label for="requirements">Permissions:</label>
+	<input value="css3d" name="requirements" type="checkbox" id="css3d" title="Allow the app to use CSS 3D Transforms"><label for="css3d" title="Allow the app to use CSS 3D Transforms">CSS 3D</label>
+	<input value="webgl" name="requirements" type="checkbox" id="webgl" title="Allow the app to use WebGL"><label for="webgl" title="Allow the app to use WebGL">WebGL</label>
+	<div class="wtf">Technologies required by the app or extension. Support for additional requirements checks may be added in the future. More information <a href="http://code.google.com/chrome/extensions/manifest.html#requirements" title="Chrome Web Store requirements documentation" target="_blank">here</a>.</div>
 </div>
 
 <div class="infoItem" id="backgroundPageContainer">
@@ -128,7 +154,7 @@ goog.require("goog.format.JsonPrettyPrinter");
 <div class="infoItem" id="launcherContainer">
 	<label for="launcher">Launch app in:</label>
 	<select name="launcher" id="launcher">
-		<option value="newtab">new tab</option>
+		<option value="newtab" selected="selected">new tab</option>
 		<option value="window">new window</option>
 		<option value="panel">new panel</option>
 	</select>

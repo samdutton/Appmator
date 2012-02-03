@@ -61,8 +61,13 @@ div.infoItem div.wtf {
 color: #666;
 font-size: 0.8em;
 margin: 0 0 0 130px;
+clear: left;
 }
 
+div.infoItem div.wtf p {
+line-height: 1.1em;
+margin: 0 0 0.3em 0;
+}
 
 
 header {
@@ -129,7 +134,7 @@ margin: 0 0 0 129px;
 
 #iconContainer {
 display: none;
-height: 170px;
+height: 185px;
 position: relative;
 margin: 0 0 35px 0;
 }
@@ -140,17 +145,18 @@ display: block;
 
 #iconContainer label {
 position: relative;
-top: 148px;
+top: 119px;
 }
 
 div#icon128 {
-padding: 6px 0 0 0;
-margin: 0 0 5px 0;
+float: left;
 height: 130px;
+margin: 0 0 5px 0;
+padding: 6px 0 0 0;
 }
 
 div#icon128 canvas {
-background:	#eee;
+background-image: url(../images/transparencyBackground.png);
 cursor: pointer;
 border: 1px dashed #666;
 margin: 0 20px 0 0;
@@ -174,11 +180,12 @@ display: block;
 
 div#iconMessage {
 background: #e5e5e5;
-bottom: -11px;
+bottom: 40px;
 color: #666;
 left: 262px;
+margin: 0 0 3px 0;
 min-width: 200px;
-padding: 0 0 0 15px;
+padding: 0 0 0 18px;
 position: absolute;
 text-align: bottom;
 }
@@ -191,7 +198,9 @@ padding: 0;
 }
 
 div#iconMessage p {
-line-height: 0.5em;
+font-size: 12px;
+font-weight: bold;
+line-height: 0.2em;
 margin: 3px 0 1.2em 0;
 }
 
@@ -210,9 +219,17 @@ div#iconMessage.warningPulse {
 100% {-webkit-transform: scale(1, 1);}
 }
 
+button.makeIcon {
+font-size: 16px;
+margin: 5px 0 10px 0;
+padding: 8px 24px 8px 23px;
+-webkit-appearance: square-button;
+width: 130px;
+}
+
 input#file128 {
 font-size: 16px;
-margin: 0 0 0 129px;
+margin: 0 0 10px 0;
 }
 
 /* aagh again! to get correct file input width in Firefox */
@@ -318,6 +335,12 @@ font-weight: normal;
 margin: 0 10px 0 0;
 }
 
+div#requirementsContainer label:not(:first-child) {
+display: inline;
+float: none;
+font-weight: normal;
+margin: 0 10px 0 0;
+}
 
 #backgroundPageContainer {
 overflow:hidden;
