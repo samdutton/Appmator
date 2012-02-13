@@ -17,27 +17,32 @@ Modernizr.addTest('blobbuilder', function() {
   
   window.addEventListener("DOMContentLoaded", function() {
   
-	$("div#addToChromeButton").click(function() {
+	$("#addToChromeButton").click(function() {
 		var url = "https://chrome.google.com/webstore/detail/pndpgaogppgnfdnagodccjlhfjgdefij";
 		var successCallback = function(){console.log("success")};
 		var failureCallback = function(message){console.log("failure: " + message)};
 		chrome.webstore.install(url, successCallback, failureCallback);	
 	});
   
-  	// hide the + ADD TO CHROME button if the app is already installed
-	if (chrome.app.isInstalled) {
-		document.getElementById("div#addToChromeButton").display = "none";
+  	// hide add to chrome button if not Chrome or app is already installed
+	if (typeof chrome === "undefined" || chrome.app.isInstalled) {
+		$("#addToChromeButton").hide();
 	}
   
 	$("button.makeIcon").click(function() {
 		// This will edit the existing icon, if you don't want that simply send in a transparent 128px icon instead of the current icon.
 		var canvasElement = document.getElementById("c128");
+		var context = canvasElement.getContext("2d");
 		var data = canvasElement.toDataURL("image/png");
 		var intent = new Intent("http://webintents.org/edit", "image/png", data);
 		window.navigator.startActivity(intent, function(newData) {
-			var newImage = new Image();
-			newImage.src = newData;
-			canvasElement.getContent().addImage(newImage, 0, 0);
+ 			var newImage = new Image();
+ 			newImage.onload = function(){
+				context.clearRect(0, 0, canvasElement.width, canvasElement.height);
+				context.drawImage(newImage, 0, 0);
+				canvasElement.style.borderStyle = "solid";
+ 			}
+ 			newImage.src = newData;
 		});
 	});
 	

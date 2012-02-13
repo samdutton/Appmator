@@ -177,7 +177,7 @@ display: none;
 display: none;
 }
 
-/* aagh again! to show download warning in Firefox */
+/* aagh! again! to show download warning in Firefox */
 body:-moz-last-node #firefoxWarning {
 color: red;
 display: block;
@@ -197,7 +197,7 @@ text-align: bottom;
 
 /* aagh again! to position correctly, given different file input appearance */
 body:-moz-last-node #iconMessage {
-bottom: 31px;
+bottom: 40px;
 left: 270px;
 padding: 0;
 }
@@ -234,10 +234,10 @@ width: 130px;
 
 input#file128 {
 font-size: 16px;
-margin: 0 0 10px 0;
+margin: 6px 0 10px 0;
 }
 
-/* aagh again! to get correct file input width in Firefox */
+/* aagh! again! to get correct file input width in Firefox */
 body:-moz-last-node input#file128 {
 width: auto;
 }
