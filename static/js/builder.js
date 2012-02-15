@@ -107,7 +107,7 @@ var Builder = new (function () {
   this.output = function(options) {
     var outputImage = document.getElementById("output");
     var zip = new JSZip();
-    zip.add("128.png", imageToBase64("128"), {base64: true});
+    zip.add("appmator128.png", imageToBase64("128"), {base64: true});
     var formatter = new goog.format.JsonPrettyPrinter();
     zip.add("manifest.json",  formatter.format(JSON.stringify(manifest)));
     

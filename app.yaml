@@ -1,5 +1,5 @@
 application: appmator
-version: 1
+version: sam
 runtime: python
 api_version: 1
 
