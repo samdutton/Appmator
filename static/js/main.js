@@ -258,28 +258,31 @@ Modernizr.addTest('blobbuilder', function() {
 	}
 	
 	// If there is a hash load URL from that
-/* 
 	if(window.location.hash && window.location.hash !="") {
-	  var newUrl = window.location.hash.substr(1);
-	  urlInput.value = newUrl;
-	  trackEvent("Load with hash");
-	  Builder.start(function(object) {
-		// Make the UI visible
-		if(object) {
-		  trackEvent("Parse success");
-		  urlInput.classList.add("success");
-		  header.classList.add("started");
-		  iconContainer.classList.add("visible");
-		}
-		else {
-		  trackEvent("Parse error");
-		  urlInput.classList.add("error");
-		}
-	  });
+		var newUrl = window.location.hash.substr(1);
+		urlInput.value = newUrl;
+		trackEvent("Load with hash");
+		Builder.start(
+			newUrl, 
+			function(object) { // success callback
+				// Make the UI visible
+				if(object) {
+					trackEvent("Parse success");
+// 					urlInput.classList.add("success");
+// 					header.classList.add("started");
+					iconContainer.classList.add("visible");
+				}
+				else {
+					trackEvent("Parse error");
+					urlInput.classList.add("error");
+				}
+			}, 
+			function(){
+				console.log("Builder.start() failed");
+			}
+		);
 	}
-
- */
- 
+	
 	// Set up Colorbox for Make Icon button
 //	$("a.makeIcon").colorbox();
 

@@ -477,7 +477,7 @@ if (inf.name.length > 45) {
   
   var fetch = function(url, successCallback, failureCallback) {
     var request = new XMLHttpRequest();
-    request.open("GET", "/api/fetch?url=" + url, true);
+    request.open("GET", "/api/fetch?url=" + encodeURI(url), true);
     request.onreadystatechange = function (e) {
       if(request.status == 200 && request.readyState == 4) {
         var object = JSON.parse(request.responseText);
